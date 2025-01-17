@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchArticlesThunk, removeArticleThunk } from "./articlesSlice";
 import { selectArticlesData } from "./ariclesSelector";
 
-const backendUrl = process.env.VITE_BACKEND_URL;
+const backendUrl = process.env.import.meta.env.VITE_BACKEND_URL;
 
 const apiURL = `${backendUrl}/photos`;
 
