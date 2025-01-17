@@ -1,4 +1,6 @@
-const apiURL = "http://10.3.24.115:8080/photos";
+const backendUrl = process.env.VITE_BACKEND_URL;
+
+const apiURL = `${backendUrl}/photos`;
 
 export const PhotosComponent = ({ product }) => {
   if (!product) {
