@@ -3,7 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchArticlesThunk, removeArticleThunk } from "./articlesSlice";
 import { selectArticlesData } from "./ariclesSelector";
 
-const apiURL = "http://10.3.24.115:8080/photos";
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
+const apiURL = `${backendUrl}/photos`;
 
 export const ArticleList = () => {
   const dispatch = useDispatch();

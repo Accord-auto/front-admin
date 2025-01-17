@@ -1,10 +1,8 @@
 import axios from "axios";
 
-const apiURL = "http://10.3.24.115:8080/articles";
-// const URL = "http://10.3.24.115:8080/";
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
-// const instance = axios.create({ baseURL: URL })
-// instance.post('/articles/${id}')
+const apiURL = `${backendUrl}/articles`;
 
 /**
  * Fetches a list of articles from the API.

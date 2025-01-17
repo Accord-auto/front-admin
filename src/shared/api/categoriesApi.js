@@ -1,6 +1,7 @@
 import axios from "axios";
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
-const apiURL = "http://10.3.24.115:8080/categories";
+const apiURL = `${backendUrl}/categories`;
 
 /**
  * Fetches a list of categories from the API.
