@@ -1,0 +1,149 @@
+.article-cont {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  border: 2px solid #3f77af;
+  width: max-content;
+  padding: 20px;
+  margin: 10px auto 20px auto;
+  border-radius: 20px;
+}
+
+.article-cont-3 {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+}
+
+.article-lbl {
+  width: 320px;
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e9ecef;
+  border-radius: 20px;
+  cursor: pointer;
+  position: relative;
+}
+
+.article-inp-file {
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+}
+
+.article-svg {
+  width: 50px;
+  height: 50px;
+}
+
+.article-cont-2 {
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.article-cont-textarea {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.article-inp-head,
+.article-txt-area {
+  color: #161616;
+  width: 100%;
+  padding: 15px;
+  font-size: 18px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  outline: none;
+  transition: border 0.3s;
+  background-color: rgb(253, 253, 253);
+}
+
+.article-txt-area {
+  height: 100%;
+  position: relative;
+}
+
+.char-count {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-size: 12px;
+  color: #999;
+  background-color: rgb(253, 253, 253);
+  padding: 0 5px;
+  border-radius: 3px;
+}
+
+.article-btn {
+  width: 150px;
+  background-color: #228129;
+  font-size: 20px;
+  padding: 5px 10px;
+  border-radius: 10px;
+  margin: 0 auto;
+  color: rgb(253, 253, 253);
+}
+
+.article-btn:hover,
+.article-btn:active,
+.article-btn-2:hover,
+.article-btn-2:active,
+.article-inp-head:hover,
+.article-inp-head:active,
+.article-txt-area:hover,
+.article-txt-area:active,
+.article-lbl:hover,
+.article-lbl:active {
+  box-shadow: 20px 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.article-btn:disabled {
+  background-color: #e9ecef;
+}
+
+.article-btn-2 {
+  width: 150px;
+  background-color: #81222a;
+  font-size: 20px;
+  padding: 5px 10px;
+  border-radius: 10px;
+  margin: 0 auto;
+  color: rgb(253, 253, 253);
+}
+
+.article-photo {
+  width: 320px;
+  height: 250px;
+  border-radius: 20px;
+}
+
+.article-cont-4 {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.article-text-2 {
+  color: #161616;
+  font-size: 18px;
+
+  word-break: break-all;
+  white-space: normal;
+}
+
+.article-title-2 {
+  color: #161616;
+  font-size: 24px;
+}
