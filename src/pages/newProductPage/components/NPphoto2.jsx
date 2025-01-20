@@ -33,6 +33,7 @@ export const NPphoto2 = () => {
         <label htmlFor="" className="newP-lbl-2">
           <img src={plus} alt="" className="article-svg" />
           <input
+            required
             className="article-inp-file"
             type="file"
             accept=".jpg, .jpeg, .png"

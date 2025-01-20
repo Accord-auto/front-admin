@@ -20,7 +20,7 @@ export const ListProducts = () => {
     return <div className="comp">Ошибка: {error}</div>;
   }
 
-  if (products.length === 0) {
+  if (products?.length === 0) {
     return <p className="comp">Создайте новый товар!</p>;
   }
 
