@@ -8,13 +8,16 @@ import right from "../../assets/images/right.svg";
 import del from "../../assets/images/delete.svg";
 import { ValuesList } from "../valuesFeature/ValuesList";
 import { selectCharacteristicsData } from "./characteristicsSelector";
+import Modal from "../../shared/components/ModalWindow/ModalWindow";
 
 export const CharacteristicsList = () => {
   const [isActive, setIsActive] = useState(null);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const dispatch = useDispatch();
   const { characteristics, status, error } = useSelector(
     selectCharacteristicsData
   );
+
   useEffect(() => {
     dispatch(fetchCharacteristicsThunk());
   }, [dispatch]);
@@ -64,7 +67,7 @@ export const CharacteristicsList = () => {
                 src={del}
                 alt=""
                 className="character-img"
-                onClick={() => removeCharacter(character.id)}
+                onClick={() => setModalIsOpen(true)}
               />
               <img
                 src={right}
@@ -72,6 +75,17 @@ export const CharacteristicsList = () => {
                 className="character-img"
                 onClick={() => handlerCharacter(character.id)}
               />
+              <Modal
+                isOpen={modalIsOpen}
+                onClose={() => setModalIsOpen(false)}
+                func={() => removeCharacter(character.id)}
+              >
+                <p>
+                  При удалении характеристики она будет удалена из всех товаров
+                  к которым относится.
+                  <br /> Вы хотите удалить характеристику?
+                </p>
+              </Modal>
             </div>
           </div>
         ))}

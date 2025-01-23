@@ -1,13 +1,15 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchValuesThunk, removeValueThunk } from "./valuesSlice";
 import { ValuesForm } from "./ValuesForm";
 import del from "../../assets/images/delete.svg";
 import { selectValuesData } from "./valuesSelector";
+import Modal from "../../shared/components/ModalWindow/ModalWindow";
 
 export const ValuesList = ({ idCharacter }) => {
   const dispatch = useDispatch();
   const { values, status, error } = useSelector(selectValuesData);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
   useEffect(() => {
     dispatch(fetchValuesThunk(idCharacter));
@@ -42,8 +44,19 @@ export const ValuesList = ({ idCharacter }) => {
               src={del}
               alt=""
               className="character-img"
-              onClick={() => deleteValue(value.id)}
+              onClick={() => setModalIsOpen(true)}
             />
+            <Modal
+              isOpen={modalIsOpen}
+              onClose={() => setModalIsOpen(false)}
+              func={() => deleteValue(value.id)}
+            >
+              <p>
+                При удалении этого значения, оно также будет удалено у всех
+                товаров.
+                <br /> Вы хотите удалить это значение характеристики?
+              </p>
+            </Modal>
           </div>
         ))
       ) : (
