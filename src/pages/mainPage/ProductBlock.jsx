@@ -10,11 +10,14 @@ import {
   toggleOfferProductThunk,
 } from "../../features/miniCatalogFeature/miniCatalogSlice";
 import { selectMiniCatalogData } from "../../features/miniCatalogFeature/miniCatalogSelector";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import Modal from "../../shared/components/ModalWindow/ModalWindow";
 
 export const ProductBlock = ({ info }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
   const { status, error } = useSelector(selectMiniCatalogData);
   const spOffer = info.specialOffer;
   const price = {
@@ -44,41 +47,59 @@ export const ProductBlock = ({ info }) => {
   };
 
   return (
-    <tr className="tr-cat">
-      <td className="td-cat">{info.customerArticle}</td>
-      <td className="td-cat">{info.categoryName}</td>
-      <td className="td-cat">{info.name}</td>
-      <td className="td-cat">{info.brand}</td>
-      <td className="td-cat">{info.count}</td>
-      <td className="td-cat">
-        {spOffer ? (
+    <>
+      <tr className="tr-cat">
+        <td className="td-cat">{info.customerArticle}</td>
+        <td className="td-cat">{info.categoryName}</td>
+        <td className="td-cat">{info.name}</td>
+        <td className="td-cat">{info.brand}</td>
+        <td className="td-cat">{info.count}</td>
+        <td className="td-cat">
+          {spOffer ? (
+            <img
+              className="td-img-cat"
+              src={check}
+              alt=""
+              onClick={toggleOffer}
+            />
+          ) : (
+            <img
+              className="td-img-cat"
+              src={cross}
+              alt=""
+              onClick={toggleOffer}
+            />
+          )}
+        </td>
+        <td className={price.discount ? "td-cat td-cat-color" : "td-cat"}>
+          {price.cost}
+        </td>
+        <td className="td-cat td-cat-cont">
           <img
             className="td-img-cat"
-            src={check}
+            src={del}
             alt=""
-            onClick={toggleOffer}
+            onClick={() => setModalIsOpen(true)}
           />
-        ) : (
           <img
             className="td-img-cat"
-            src={cross}
+            src={correct}
             alt=""
-            onClick={toggleOffer}
+            onClick={() => navigate(`/changeProduct/${info.id}`)}
           />
-        )}
-      </td>
-      <td className={price.discount ? "td-cat td-cat-color" : "td-cat"}>
-        {price.cost}
-      </td>
-      <td className="td-cat td-cat-cont">
-        <img className="td-img-cat" src={del} alt="" onClick={removeProduct} />
-        <img
-          className="td-img-cat"
-          src={correct}
-          alt=""
-          onClick={() => navigate(`/changeProduct/${info.id}`)}
-        />
-      </td>
-    </tr>
+        </td>
+      </tr>
+      <Modal
+        isOpen={modalIsOpen}
+        onClose={() => setModalIsOpen(false)}
+        func={() => removeProduct(info.id)}
+      >
+        <p>
+          При удалении товара он будет безвозвратно удален(так же и с основного
+          сайта).
+          <br /> Вы хотите удалить товар?
+        </p>
+      </Modal>{" "}
+    </>
   );
 };

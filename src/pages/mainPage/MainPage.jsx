@@ -1,4 +1,5 @@
 import warning from "../../assets/images/warning.svg";
+import search from "../../assets/images/search.svg";
 import { ButtonsComponent } from "./ButtonsComponent";
 import { ListProducts } from "./ListProducts";
 import "./mainpage.css";
@@ -23,7 +24,16 @@ export const MainPage = () => {
       </div>
       <ButtonsComponent />
       <hr />
-      <h1 className="title-page">Ваши товары</h1>
+      <div className="main-cont-1">
+        <h1 className="title-page">Ваши товары</h1>
+        <img
+          src={search}
+          alt=""
+          width="40px"
+          height="auto"
+          className="main-img-1"
+        />
+      </div>
       <ListProducts />
     </>
   );

@@ -50,6 +50,7 @@ export const addProduct = async (form, thunkAPI) => {
 
 export const getProduct = async (id) => {
   const res = await axios.get(`${apiURL}/${id}`);
+  console.log(res.data);
   return res.data;
 };
 
@@ -95,5 +96,18 @@ export const toggleOfferProduct = async (id) => {
       "Content-Type": "application/json",
     },
   });
+  return res.data;
+};
+
+export const getProductArticle = async (article) => {
+  const res = await axios.get(`${apiURL}/customerArticle`, {
+    params: {
+      customerArticle: article,
+    },
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  console.log(res.data);
   return res.data;
 };

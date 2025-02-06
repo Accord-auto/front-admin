@@ -5,14 +5,16 @@ export const funcCreateProduct = async (form, thunkAPI) => {
   const additional = [];
 
   const img = await (await fetch(form.photos.mainPhoto)).blob();
-
-  const file = new File([img], "test.png", { type: img.type });
+  const mainFile = new File([img], "test.png", { type: img.type });
+  formData.append("mainPhoto", mainFile);
 
   for (let i = 0; i < form.photos.morePhotos.length; i++) {
-    const img2 = await (await fetch(form.photos.morePhotos[i])).blob();
-    const file2 = new File([img2], "test.png", { type: img2.type });
-    formData.append("additionalPhotos", file2);
-    additional.push(file2);
+    const imgAdditional = await (await fetch(form.photos.morePhotos[i])).blob();
+    const otherFile = new File([imgAdditional], "test.png", {
+      type: imgAdditional.type,
+    });
+    formData.append("additionalPhotos", otherFile);
+    additional.push(otherFile);
   }
 
   formData.append(
@@ -21,9 +23,7 @@ export const funcCreateProduct = async (form, thunkAPI) => {
       ...form.info,
     })
   );
-  formData.append("mainPhoto", file);
 
   const res = await addProduct(formData, thunkAPI);
-
   return res;
 };
