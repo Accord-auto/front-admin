@@ -1,5 +1,4 @@
 import warning from "../../assets/images/warning.svg";
-import search from "../../assets/images/search.svg";
 import { ButtonsComponent } from "./ButtonsComponent";
 import { ListProducts } from "./ListProducts";
 import "./mainpage.css";
