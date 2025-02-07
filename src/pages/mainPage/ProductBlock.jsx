@@ -99,7 +99,7 @@ export const ProductBlock = ({ info }) => {
           сайта).
           <br /> Вы хотите удалить товар?
         </p>
-      </Modal>{" "}
+      </Modal>
     </>
   );
 };
