@@ -1,12 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import { selectMiniCatalogData } from "../../features/miniCatalogFeature/miniCatalogSelector";
 import { ProductBlock } from "./ProductBlock";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { fetchMiniCatalogThunk } from "../../features/miniCatalogFeature/miniCatalogSlice";
+import { ComponentArticle } from "./ComponentArticle";
 
 export const ListProducts = () => {
   const dispatch = useDispatch();
   const { products, status, error } = useSelector(selectMiniCatalogData);
+  const [productArticle, setProductArticle] = useState(null);
 
   useEffect(() => {
     dispatch(fetchMiniCatalogThunk());
@@ -25,24 +27,31 @@ export const ListProducts = () => {
   }
 
   return (
-    <table className="table-categories">
-      <thead>
-        <tr className="tr-cat">
-          <th className="th-cat th-first-cat">Ун. артикул</th>
-          <th className="th-cat">Категория</th>
-          <th className="th-cat ">Название</th>
-          <th className="th-cat ">Бренд</th>
-          <th className="th-cat ">Кол-во</th>
-          <th className="th-cat ">Спец. предл.</th>
-          <th className="th-cat ">Цена</th>
-          <th className="th-cat th-last-cat">Действия</th>
-        </tr>
-      </thead>
-      <tbody>
-        {products?.map((product) => (
-          <ProductBlock info={product} key={product.id} />
-        ))}
-      </tbody>
-    </table>
+    <>
+      <ComponentArticle setstate={setProductArticle} />
+      <table className="table-categories">
+        <thead>
+          <tr className="tr-cat">
+            <th className="th-cat th-first-cat">Ун. артикул</th>
+            <th className="th-cat">Категория</th>
+            <th className="th-cat ">Название</th>
+            <th className="th-cat ">Бренд</th>
+            <th className="th-cat ">Кол-во</th>
+            <th className="th-cat ">Спец. предл.</th>
+            <th className="th-cat ">Цена</th>
+            <th className="th-cat th-last-cat">Действия</th>
+          </tr>
+        </thead>
+        <tbody>
+          {productArticle !== null ? (
+            <ProductBlock info={productArticle} />
+          ) : (
+            products?.map((product) => (
+              <ProductBlock info={product} key={product.id} />
+            ))
+          )}
+        </tbody>
+      </table>
+    </>
   );
 };
