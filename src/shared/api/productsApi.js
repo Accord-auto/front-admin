@@ -6,7 +6,7 @@ const apiURL = `${backendUrl}/products`;
 const params = {
   offset: 0,
   limit: 20,
-  sort: "ID_ASC",
+  sort: "COUNT_ASC",
 };
 
 export const fetchMiniCatalog = async () => {
