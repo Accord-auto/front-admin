@@ -14,11 +14,10 @@ import { useEffect, useState } from "react";
 import Modal from "../../shared/components/ModalWindow/ModalWindow";
 
 export const ProductBlock = ({ info }) => {
+  const { status, error } = useSelector(selectMiniCatalogData);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [modalIsOpen, setModalIsOpen] = useState(false);
-
-  const { status, error } = useSelector(selectMiniCatalogData);
   const spOffer = info.specialOffer;
   const price = {
     cost: info.price.discount !== 0 ? info.price.discount : info.price.value,
@@ -48,7 +47,7 @@ export const ProductBlock = ({ info }) => {
 
   return (
     <>
-      <tr className="tr-cat">
+      <tr className={`tr-cat ${info.count === 0 ? "tr-cat-red" : ""}  `}>
         <td className="td-cat">{info.customerArticle}</td>
         <td className="td-cat">{info.categoryName}</td>
         <td className="td-cat">{info.name}</td>

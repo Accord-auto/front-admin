@@ -5,6 +5,7 @@ import { ArticlesPage } from "./pages/articlesPage/ArticlesPage";
 import { CharacteristicsPage } from "./pages/characteristicsPage/CharacteristicsPage";
 import { NewProductPage } from "./pages/newProductPage/NewProductPage";
 import { EditablePage } from "./pages/editablePage/EditablePage";
+import { BranchesPage } from "./pages/branchesPage/BranchesPage";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/articles" element={<ArticlesPage />}></Route>
         <Route path="/newProduct" element={<NewProductPage />}></Route>
         <Route path="/changeProduct/:id" element={<EditablePage />}></Route>
+        <Route path="/branches" element={<BranchesPage />}></Route>
       </Routes>
     </BrowserRouter>
   );

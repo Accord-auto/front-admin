@@ -5,7 +5,7 @@ const apiURL = `${backendUrl}/products`;
 
 const params = {
   offset: 0,
-  limit: 20,
+  limit: 30,
   sort: "COUNT_ASC",
 };
 
@@ -108,6 +108,5 @@ export const getProductArticle = async (article) => {
       "Content-Type": "application/json",
     },
   });
-  console.log(res.data);
   return res.data;
 };

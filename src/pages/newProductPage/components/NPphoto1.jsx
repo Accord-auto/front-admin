@@ -19,18 +19,45 @@ export const NPphoto1 = () => {
     setBlob(url);
   };
 
+  const handlePaste = (e) => {
+    const items = e.clipboardData.items;
+    for (let i = 0; i < items.length; i++) {
+      const item = items[i];
+      if (item.type.indexOf("image") !== -1) {
+        const file = item.getAsFile();
+        onChangeImg(file);
+      }
+    }
+  };
+
+  const handleUrlChange = (e) => {
+    const url = e.target.value;
+    if (url) {
+      dispatch(updateMainPhoto(url));
+      setBlob(url);
+    }
+  };
+
   return (
     <>
       {blob ? (
         <img src={blob} className="newP-photo"></img>
       ) : (
-        <label htmlFor="" className="newP-lbl">
-          <img src={plus} alt="" className="article-svg" />
+        <label htmlFor="" className="newP-lbl" onPaste={handlePaste}>
+          <div className="newP-url-cont">
+            <img src={plus} alt="" className="newP-url-cont-svg" />
+            <input
+              type="text"
+              placeholder="URL image"
+              className="inp-data url-input"
+              onBlur={handleUrlChange}
+            />
+          </div>
           <input
             required
             className="article-inp-file"
             type="file"
-            accept=".jpg, .jpeg, .png"
+            accept="image/*"
             onChange={(e) => onChangeImg(e.target.files[0])}
           />
         </label>

@@ -91,3 +91,7 @@
   flex-direction: row;
   justify-content: space-between;
 }
+
+.tr-cat-red {
+  background-color: #c46557;
+}

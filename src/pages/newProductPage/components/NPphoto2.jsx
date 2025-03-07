@@ -25,18 +25,37 @@ export const NPphoto2 = () => {
     }));
   };
 
+  const handleUrlChange = (e, key) => {
+    const url = e.target.value;
+    if (url) {
+      dispatch(updateMorePhotos(url));
+      setFormPhoto((prev) => ({
+        ...prev,
+        [key]: url,
+      }));
+    }
+  };
+
   return (
     <div className="newP-cont-photos">
       {formPhoto.fileOne ? (
         <img src={formPhoto.fileOne} className="newP-photo-more"></img>
       ) : (
         <label htmlFor="" className="newP-lbl-2">
-          <img src={plus} alt="" className="article-svg" />
+          <div className="newP-url-cont">
+            <img src={plus} alt="" className="newP-url-cont-svg" />
+            <input
+              type="text"
+              placeholder="URL image"
+              className="inp-data url-input"
+              onBlur={(e) => handleUrlChange(e, "fileOne")}
+            />
+          </div>
           <input
             required
             className="article-inp-file"
             type="file"
-            accept=".jpg, .jpeg, .png"
+            accept="image/*"
             onChange={(e) => onChangeImg(e.target.files[0], "fileOne")}
           />
         </label>
@@ -46,11 +65,19 @@ export const NPphoto2 = () => {
         <img src={formPhoto.fileTwo} className="newP-photo-more"></img>
       ) : (
         <label htmlFor="" className="newP-lbl-2">
-          <img src={plus} alt="" className="article-svg" />
+          <div className="newP-url-cont">
+            <img src={plus} alt="" className="newP-url-cont-svg" />
+            <input
+              type="text"
+              placeholder="URL image"
+              className="inp-data url-input"
+              onBlur={(e) => handleUrlChange(e, "fileTwo")}
+            />
+          </div>
           <input
             className="article-inp-file"
             type="file"
-            accept=".jpg, .jpeg, .png"
+            accept="image/*"
             onChange={(e) => onChangeImg(e.target.files[0], "fileTwo")}
           />
         </label>
@@ -59,11 +86,19 @@ export const NPphoto2 = () => {
         <img src={formPhoto.fileThree} className="newP-photo-more"></img>
       ) : (
         <label htmlFor="" className="newP-lbl-2">
-          <img src={plus} alt="" className="article-svg" />
+          <div className="newP-url-cont">
+            <img src={plus} alt="" className="newP-url-cont-svg" />
+            <input
+              type="text"
+              placeholder="URL image"
+              className="inp-data url-input"
+              onBlur={(e) => handleUrlChange(e, "fileThree")}
+            />
+          </div>
           <input
             className="article-inp-file"
             type="file"
-            accept=".jpg, .jpeg, .png"
+            accept="image/*"
             onChange={(e) => onChangeImg(e.target.files[0], "fileThree")}
           />
         </label>

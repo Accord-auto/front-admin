@@ -36,6 +36,26 @@
   height: 350px;
 }
 
+.newP-url-cont {
+  width: max-content;
+  height: max-content;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.newP-url-cont-svg {
+  width: 50px;
+  height: 50px;
+}
+
+.url-input {
+  z-index: 10;
+  max-width: 150px;
+}
+
 .newP-cont-photos {
   display: flex;
   flex-direction: row;

@@ -24,6 +24,9 @@ export const ButtonsComponent = () => {
       <button className="main-btns" onClick={() => navigate("/articles")}>
         Статьи
       </button>
+      <button className="main-btns" onClick={() => navigate("/branches")}>
+        Филиалы
+      </button>
     </div>
   );
 };
