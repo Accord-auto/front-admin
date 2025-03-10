@@ -1,16 +1,20 @@
-import { addBranch } from "../../shared/api/branchesApi";
+import {
+  addBranch,
+  fetchDepartmentBranches,
+  removeBranch,
+} from "../../shared/api/branchesApi";
 
-// export const funcFetchCategories = async () => {
-//   const res = await fetchCategories();
-//   return res;
-// };
+export const funcFetchDepartmentsBranches = async () => {
+  const res = await fetchDepartmentBranches();
+  return res;
+};
 
 export const funcAddBranch = async (body) => {
   const res = await addBranch(body);
   return res;
 };
 
-// export const funcRemoveCategory = async (categoryId) => {
-//   const res = await removeCategory(categoryId);
-//   return res;
-// };
+export const funcRemoveBranch = async (id) => {
+  const res = await removeBranch(id);
+  return res;
+};

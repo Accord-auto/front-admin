@@ -1,9 +1,23 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { funcAddBranch } from "./brancesFunction";
+import {
+  funcAddBranch,
+  funcFetchDepartmentsBranches,
+  funcRemoveBranch,
+} from "./brancesFunction";
 
 export const addBrunchThunk = createAsyncThunk(
   "newBranch/addBranch",
   funcAddBranch
+);
+
+export const getDepartmentsBranchesThunk = createAsyncThunk(
+  "newBranch/getDepartmentsBranches",
+  funcFetchDepartmentsBranches
+);
+
+export const deleteBrunchThunk = createAsyncThunk(
+  "newBranch/deleteBranch",
+  funcRemoveBranch
 );
 
 const newBranchSlice = createSlice({
@@ -26,6 +40,7 @@ const newBranchSlice = createSlice({
       ],
       typeCompany: "DEPARTMENT",
     },
+    departmentsBranches: [],
     status: "idle",
     error: null,
   },
@@ -34,16 +49,16 @@ const newBranchSlice = createSlice({
       state.InfoBranch.typeCompany = action.payload;
     },
     updateName(state, action) {
-      state.InfoBranch.name = action.payload.trim();
+      state.InfoBranch.name = action.payload;
     },
     updateCity(state, action) {
-      state.InfoBranch.address.city = action.payload.trim();
+      state.InfoBranch.address.city = action.payload;
     },
     updateStreet(state, action) {
-      state.InfoBranch.address.street = action.payload.trim();
+      state.InfoBranch.address.street = action.payload;
     },
     updateState(state, action) {
-      state.InfoBranch.address.state = action.payload.trim();
+      state.InfoBranch.address.state = action.payload;
     },
     updateZipcode(state, action) {
       state.InfoBranch.address.zipCode = action.payload;
@@ -63,7 +78,11 @@ const newBranchSlice = createSlice({
     delSocialMedia(state, action) {
       state.InfoBranch.contacts[0].socialURLs =
         state.InfoBranch.contacts[0].socialURLs.filter(
-          (element) => element !== action.payload
+          (element) =>
+            !(
+              element.type === action.payload.type &&
+              element.url === action.payload.url
+            )
         );
     },
     resetAllBranch(state) {
@@ -89,6 +108,27 @@ const newBranchSlice = createSlice({
       })
       .addCase(addBrunchThunk.rejected, (state, action) => {
         state.status = "failed/add";
+        state.error = action.error.message;
+      })
+      .addCase(getDepartmentsBranchesThunk.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(getDepartmentsBranchesThunk.fulfilled, (state, action) => {
+        state.status = "successfully";
+        state.departmentsBranches = action.payload;
+      })
+      .addCase(getDepartmentsBranchesThunk.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      })
+      .addCase(deleteBrunchThunk.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(deleteBrunchThunk.fulfilled, (state) => {
+        state.status = "successfully/remove";
+      })
+      .addCase(deleteBrunchThunk.rejected, (state, action) => {
+        state.status = "failed/remove";
         state.error = action.error.message;
       });
   },

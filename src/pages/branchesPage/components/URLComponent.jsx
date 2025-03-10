@@ -6,23 +6,23 @@ import { URLBlock } from "./URLBlock";
 
 export const URLComponent = () => {
   const { infoBranch } = useSelector(selectNewPBranchData);
-  const [arrSocialMedia, setArrSocialMedia] = useState([]);
+  const socialURLs = infoBranch.contacts[0].socialURLs || [];
+
+  const [count, setCount] = useState(socialURLs.length);
 
   useEffect(() => {
-    if (infoBranch?.contacts[0]?.socialURLs) {
-      setArrSocialMedia(infoBranch.contacts[0].socialURLs);
-    }
-  }, [infoBranch?.contacts[0]?.socialURLs]);
+    setCount(socialURLs.length);
+  }, [socialURLs]);
 
   const handleNewBlock = () => {
-    setArrSocialMedia((prev) => [...prev, ""]);
+    setCount((prev) => prev + 1);
   };
 
   return (
     <>
       <h2 className="br-title">Соц. сети</h2>
 
-      {arrSocialMedia.map((_, i) => (
+      {Array.from({ length: count }).map((_, i) => (
         <URLBlock key={i} number={i} />
       ))}
       <img src={plus} alt="" className="br-ss-img" onClick={handleNewBlock} />

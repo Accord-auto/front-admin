@@ -3,10 +3,15 @@ import axios from "axios";
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 const apiURL = `${backendUrl}/companies`;
 
-// export const fetchArticles = async () => {
-//   const res = await axios.get(apiURL);
-//   return res.data;
-// };
+export const fetchHeadersBranches = async () => {
+  const res = await axios.get(`${apiURL}/header`);
+  return res.data;
+};
+
+export const fetchDepartmentBranches = async () => {
+  const res = await axios.get(`${apiURL}/departments`);
+  return res.data;
+};
 
 export const addBranch = async (form, thunkAPI) => {
   return await axios
@@ -23,7 +28,7 @@ export const addBranch = async (form, thunkAPI) => {
     });
 };
 
-// export const removeArticle = async (id) => {
-//   const res = await axios.delete(`${apiURL}/${id}`);
-//   return res.data;
-// };
+export const removeBranch = async (id) => {
+  const res = await axios.delete(`${apiURL}/${id}`);
+  return res.data;
+};

@@ -20,11 +20,7 @@ export const AddressBlock = () => {
   };
 
   const handleStreet = (e) => {
-    const value = e.replace(
-      /^(.)(.*)$/,
-      (_, first, rest) => first.toUpperCase() + rest
-    );
-    dispatch(updateStreet(value));
+    dispatch(updateStreet(e));
   };
 
   const handleState = (e) => {
@@ -59,7 +55,7 @@ export const AddressBlock = () => {
             required
             type="text"
             className="br-address-inp"
-            placeholder="Название улицы"
+            placeholder="ул. Чкалова, 3"
             value={infoBranch.address.street}
             onChange={(e) => handleStreet(e.target.value)}
           />
@@ -69,7 +65,7 @@ export const AddressBlock = () => {
             required
             type="text"
             className="br-address-inp"
-            placeholder="Номер дома"
+            placeholder="Страна"
             value={infoBranch.address.state}
             onChange={(e) => handleState(e.target.value)}
           />

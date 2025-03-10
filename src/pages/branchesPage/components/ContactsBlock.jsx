@@ -44,7 +44,6 @@ export const ContactsBlock = () => {
           onChange={(e) => handlePhone(e.target.value)}
         />
         <input
-          required
           type="text"
           className="br-address-inp"
           placeholder="ivanov@mail.com"
