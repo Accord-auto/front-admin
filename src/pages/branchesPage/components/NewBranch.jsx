@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AddressBlock } from "./AddressBlock";
 import { ContactsBlock } from "./ContactsBlock";
 import { RadioChoice } from "./RadioChoice";
-import { URLComponent } from "./UrlComponent";
+import { URLComponent } from "./URLComponent.jsx";
 import { selectNewPBranchData } from "../../../features/branchesFeature/branchesSelector";
 import { addBrunchThunk } from "../../../features/branchesFeature/branchesSlice";
 import { NamingBlock } from "./NamingBlock";
