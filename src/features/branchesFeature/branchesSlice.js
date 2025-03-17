@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {
   funcAddBranch,
   funcFetchDepartmentsBranches,
+  funcFetchHeaderBranches,
   funcRemoveBranch,
 } from "./brancesFunction";
 
@@ -13,6 +14,11 @@ export const addBrunchThunk = createAsyncThunk(
 export const getDepartmentsBranchesThunk = createAsyncThunk(
   "newBranch/getDepartmentsBranches",
   funcFetchDepartmentsBranches
+);
+
+export const getHeaderBranchesThunk = createAsyncThunk(
+  "newBranch/getHeaderBranches",
+  funcFetchHeaderBranches
 );
 
 export const deleteBrunchThunk = createAsyncThunk(
@@ -41,6 +47,7 @@ const newBranchSlice = createSlice({
       typeCompany: "DEPARTMENT",
     },
     departmentsBranches: [],
+    headerBranches: [],
     status: "idle",
     error: null,
   },
@@ -118,6 +125,17 @@ const newBranchSlice = createSlice({
         state.departmentsBranches = action.payload;
       })
       .addCase(getDepartmentsBranchesThunk.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      })
+      .addCase(getHeaderBranchesThunk.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(getHeaderBranchesThunk.fulfilled, (state, action) => {
+        state.status = "successfully";
+        state.headerBranches = action.payload;
+      })
+      .addCase(getHeaderBranchesThunk.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
       })

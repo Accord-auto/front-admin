@@ -6,6 +6,7 @@ import { NewBranch } from "./components/NewBranch";
 import { selectNewPBranchData } from "../../features/branchesFeature/branchesSelector";
 import {
   getDepartmentsBranchesThunk,
+  getHeaderBranchesThunk,
   resetAllBranch,
 } from "../../features/branchesFeature/branchesSlice";
 import { useEffect } from "react";
@@ -15,6 +16,7 @@ export const BranchesPage = () => {
   const { status } = useSelector(selectNewPBranchData);
 
   useEffect(() => {
+    dispatch(getHeaderBranchesThunk());
     dispatch(getDepartmentsBranchesThunk());
   }, [dispatch]);
 
@@ -28,9 +30,11 @@ export const BranchesPage = () => {
     if (status === "successfully/add") {
       alert("Филиал создан успешно!");
       dispatch(resetAllBranch());
+      dispatch(getHeaderBranchesThunk());
       dispatch(getDepartmentsBranchesThunk());
     }
     if (status === "successfully/remove") {
+      dispatch(getHeaderBranchesThunk());
       dispatch(getDepartmentsBranchesThunk());
     }
   }, [status]);
