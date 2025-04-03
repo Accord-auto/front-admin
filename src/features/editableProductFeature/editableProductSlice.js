@@ -21,7 +21,7 @@ export const changePriceThunk = createAsyncThunk(
   "editableProduct/changePrice",
   async ({ id, price }, thunkAPI) => {
     try {
-      const response = await funcChangePriceProduct(id, price);
+      const response = await funcChangePriceProduct(id, price, thunkAPI);
       return response;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response?.data || error.message);
@@ -33,7 +33,7 @@ export const changeDiscountThunk = createAsyncThunk(
   "editableProduct/changeDiscount",
   async ({ id, price }, thunkAPI) => {
     try {
-      const response = await funcChangeDiscountProduct(id, price);
+      const response = await funcChangeDiscountProduct(id, price, thunkAPI);
       return response;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response?.data || error.message);
@@ -45,7 +45,7 @@ export const changeCountThunk = createAsyncThunk(
   "editableProduct/changeCount",
   async ({ id, count }, thunkAPI) => {
     try {
-      const response = await funcChangeCountProduct(id, count);
+      const response = await funcChangeCountProduct(id, count, thunkAPI);
       return response;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response?.data || error.message);

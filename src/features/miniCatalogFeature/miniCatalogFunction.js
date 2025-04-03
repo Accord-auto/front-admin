@@ -18,7 +18,10 @@ export const funcDeleteProduct = async (id, thunkAPI) => {
   return res;
 };
 
-export const funcToggleOfferProduct = async (id) => {
-  const res = await toggleOfferProduct(id);
+export const funcToggleOfferProduct = async (id, thunkAPI) => {
+  const state = thunkAPI.getState();
+  const { token } = selectAuthData(state);
+
+  const res = await toggleOfferProduct(id, token);
   return res;
 };

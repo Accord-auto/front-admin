@@ -16,8 +16,8 @@ export const funcFetchHeaderBranches = async () => {
   return res;
 };
 
-export const funcAddBranch = async (body) => {
-  const res = await addBranch(body);
+export const funcAddBranch = async (body, thunkAPI) => {
+  const res = await addBranch(body, thunkAPI);
   return res;
 };
 

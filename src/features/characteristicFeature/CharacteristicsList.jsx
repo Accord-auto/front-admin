@@ -1,17 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import {
-  fetchCharacteristicsThunk,
-  removeCharacteristicThunk,
-} from "./characteristicsSlice";
-import right from "../../assets/images/right.svg";
-import del from "../../assets/images/delete.svg";
+import { fetchCharacteristicsThunk } from "./characteristicsSlice";
 import { ValuesList } from "../valuesFeature/ValuesList";
 import { selectCharacteristicsData } from "./characteristicsSelector";
 import Modal from "../../shared/components/ModalWindow/ModalWindow";
+import { CharacteristicBlock } from "../../pages/characteristicsPage/CharacteristicBlock";
 
 export const CharacteristicsList = () => {
-  const [isActive, setIsActive] = useState(null);
+  const [idCheck, setIdCheck] = useState(null);
   const dispatch = useDispatch();
   const { characteristics, status, error } = useSelector(
     selectCharacteristicsData
@@ -27,12 +23,8 @@ export const CharacteristicsList = () => {
     }
   }, [status]);
 
-  const removeCharacter = (id) => {
-    dispatch(removeCharacteristicThunk(id));
-  };
-
   const handlerCharacter = (id) => {
-    setIsActive(id);
+    setIdCheck(id);
   };
 
   if (status === "loading") {
@@ -51,32 +43,16 @@ export const CharacteristicsList = () => {
     <div className="character-value-cont">
       <div className="character-main-cont">
         {characteristics.map((character) => (
-          <div
-            className={`character-cont ${
-              isActive === character.id ? "character-active" : ""
-            }`}
+          <CharacteristicBlock
+            changeFunc={handlerCharacter}
+            characteristicInfo={character}
+            selectedId={idCheck}
             key={character.id}
-          >
-            <p className="character-text">{character.name}</p>
-            <div className="character-cont-2">
-              <img
-                src={del}
-                alt=""
-                className="character-img"
-                onClick={() => removeCharacter(character.id)}
-              />
-              <img
-                src={right}
-                alt=""
-                className="character-img"
-                onClick={() => handlerCharacter(character.id)}
-              />
-            </div>
-          </div>
+          />
         ))}
       </div>
-      {isActive ? (
-        <ValuesList idCharacter={isActive} />
+      {idCheck ? (
+        <ValuesList idCharacter={idCheck} />
       ) : (
         <p className="comp">Выберите характеристику</p>
       )}

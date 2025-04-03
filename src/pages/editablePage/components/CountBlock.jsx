@@ -10,7 +10,7 @@ import { useEffect } from "react";
 
 export const CountBlock = ({ count, countType }) => {
   const dispatch = useDispatch();
-  const { status } = useSelector(selectEditableProductData);
+  const { status, error } = useSelector(selectEditableProductData);
   const { id } = useParams();
 
   useEffect(() => {

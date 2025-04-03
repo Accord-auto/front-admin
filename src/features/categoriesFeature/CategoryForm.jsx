@@ -7,7 +7,7 @@ import { selectCategoriesData } from "./categoriesSelector";
 export const CategoryForm = () => {
   const [categoryName, setCategoryName] = useState("");
   const dispatch = useDispatch();
-  const { status } = useSelector(selectCategoriesData);
+  const { status, error } = useSelector(selectCategoriesData);
 
   useEffect(() => {
     if (status === "failed/add") {

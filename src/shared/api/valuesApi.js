@@ -62,27 +62,20 @@ export const addValue = async (id, name, token) => {
 
 export const removeValue = async (id, idValue, token) => {
   console.log(id, idValue, token);
-  await axios
-    .delete(
-      apiURL + "/delete-value",
-      {
-        data: {
-          idCharacteristic: id,
-          idValue: idValue,
-        },
+  try {
+    const res = await axios.delete(apiURL + "/delete-value", {
+      headers: {
+        "Content-Type": "application/json",
+        "X-API-KEY": token,
       },
-      {
-        headers: {
-          "Content-Type": "application/json",
-          "X-API-KEY": token,
-        },
-      }
-    )
-    .then(function (res) {
-      return res.data;
-    })
-    .catch(function (error) {
-      console.log(error);
-      return error;
+      data: {
+        idCharacteristic: id,
+        idValue: idValue,
+      },
     });
+    return res.data;
+  } catch (error) {
+    console.error("Ошибка при удалении:", error.response?.data || error);
+    return error;
+  }
 };

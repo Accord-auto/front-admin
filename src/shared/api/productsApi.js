@@ -59,28 +59,32 @@ export const getProduct = async (id) => {
   return res.data;
 };
 
-export const changePriceProduct = async (id, price) => {
+export const changePriceProduct = async (id, price, token) => {
   const res = await axios.put(`${apiURL}/${id}/price`, price, {
     headers: {
       "Content-Type": "application/json",
+      "X-API-KEY": token,
     },
   });
   return res.data;
 };
 
-export const changeDiscountProduct = async (id, price) => {
+export const changeDiscountProduct = async (id, price, token) => {
   const res = await axios.put(`${apiURL}/${id}/discount`, price, {
     headers: {
       "Content-Type": "application/json",
+      "X-API-KEY": token,
     },
   });
   return res.data;
 };
 
-export const changeCountProduct = async (id, count) => {
+export const changeCountProduct = async (id, count, token) => {
+  console.log(id, count, token);
   const res = await axios.put(`${apiURL}/${id}/count`, count, {
     headers: {
       "Content-Type": "application/json",
+      "X-API-KEY": token,
     },
   });
   return res.data;
@@ -96,12 +100,17 @@ export const deleteProduct = async (id, token) => {
   return res.data;
 };
 
-export const toggleOfferProduct = async (id) => {
-  const res = await axios.put(`${apiURL}/${id}/toggle-special-offer`, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+export const toggleOfferProduct = async (id, token) => {
+  const res = await axios.put(
+    `${apiURL}/${id}/toggle-special-offer`,
+    {},
+    {
+      headers: {
+        "Content-Type": "application/json",
+        "X-API-KEY": token,
+      },
+    }
+  );
   return res.data;
 };
 
