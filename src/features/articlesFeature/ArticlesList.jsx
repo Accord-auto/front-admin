@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchArticlesThunk, removeArticleThunk } from "./articlesSlice";
 import { selectArticlesData } from "./ariclesSelector";
+import { selectAuthData } from "../authFeature/authSelector";
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
@@ -45,8 +46,8 @@ export const ArticleList = () => {
     <>
       <p className="title-page">Ваши статьи</p>
       <div className="article-cont-4">
-        {articles.map((article) => (
-          <div className="article-cont">
+        {articles.map((article, i) => (
+          <div className="article-cont" key={i}>
             <div className="article-cont-3">
               <img
                 src={`${apiURL}/${article.photoUrl}`}

@@ -17,12 +17,23 @@ export const NPphoto2 = () => {
   });
 
   const onChangeImg = (image, key) => {
-    dispatch(updateMorePhotos(URL.createObjectURL(image)));
-
+    const blobUrl = URL.createObjectURL(image);
+    dispatch(updateMorePhotos(blobUrl));
     setFormPhoto((prev) => ({
       ...prev,
-      [key]: URL.createObjectURL(image),
+      [key]: blobUrl,
     }));
+  };
+
+  const handlePaste = (e, key) => {
+    const items = e.clipboardData.items;
+    for (let i = 0; i < items.length; i++) {
+      const item = items[i];
+      if (item.type.indexOf("image") !== -1) {
+        const file = item.getAsFile();
+        onChangeImg(file, key);
+      }
+    }
   };
 
   const handleUrlChange = (e, key) => {
@@ -49,10 +60,12 @@ export const NPphoto2 = () => {
               placeholder="URL image"
               className="inp-data url-input"
               onBlur={(e) => handleUrlChange(e, "fileOne")}
+              name="textPhoto2"
+              onPaste={(e) => handlePaste(e, "fileOne")}
             />
           </div>
           <input
-            required
+            name="Photo2"
             className="article-inp-file"
             type="file"
             accept="image/*"
@@ -72,9 +85,12 @@ export const NPphoto2 = () => {
               placeholder="URL image"
               className="inp-data url-input"
               onBlur={(e) => handleUrlChange(e, "fileTwo")}
+              name="textPhoto3"
+              onPaste={(e) => handlePaste(e, "fileTwo")}
             />
           </div>
           <input
+            name="Photo3"
             className="article-inp-file"
             type="file"
             accept="image/*"
@@ -93,6 +109,8 @@ export const NPphoto2 = () => {
               placeholder="URL image"
               className="inp-data url-input"
               onBlur={(e) => handleUrlChange(e, "fileThree")}
+              name="textPhoto4"
+              onPaste={(e) => handlePaste(e, "fileThree")}
             />
           </div>
           <input
@@ -100,6 +118,7 @@ export const NPphoto2 = () => {
             type="file"
             accept="image/*"
             onChange={(e) => onChangeImg(e.target.files[0], "fileThree")}
+            name="Photo4"
           />
         </label>
       )}

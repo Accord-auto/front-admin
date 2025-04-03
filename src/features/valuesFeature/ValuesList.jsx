@@ -22,6 +22,7 @@ export const ValuesList = ({ idCharacter }) => {
   }, [status]);
 
   const deleteValue = (idValue) => {
+    console.log("idC: " + idCharacter + ", idV: " + idValue);
     dispatch(removeValueThunk({ idC: idCharacter, idV: idValue }));
   };
 
@@ -44,19 +45,8 @@ export const ValuesList = ({ idCharacter }) => {
               src={del}
               alt=""
               className="character-img"
-              onClick={() => setModalIsOpen(true)}
+              onClick={() => deleteValue(value.id)}
             />
-            <Modal
-              isOpen={modalIsOpen}
-              onClose={() => setModalIsOpen(false)}
-              func={() => deleteValue(value.id)}
-            >
-              <p>
-                При удалении этого значения, оно также будет удалено у всех
-                товаров.
-                <br /> Вы хотите удалить это значение характеристики?
-              </p>
-            </Modal>
           </div>
         ))
       ) : (

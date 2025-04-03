@@ -8,6 +8,7 @@ import miniCatalogSlice from "../features/miniCatalogFeature/miniCatalogSlice";
 import editableProductSlice from "../features/editableProductFeature/editableProductSlice";
 import getProductArticleSlice from "../features/getProductArticle/getProductArticleSlice";
 import newBranchSlice from "../features/branchesFeature/branchesSlice";
+import authSlice from "../features/authFeature/authSlice";
 
 export const store = configureStore({
   reducer: {
@@ -20,5 +21,6 @@ export const store = configureStore({
     editableProduct: editableProductSlice,
     productGetArticle: getProductArticleSlice,
     newBranch: newBranchSlice,
+    auth: authSlice,
   },
 });

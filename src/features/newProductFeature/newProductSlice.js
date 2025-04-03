@@ -47,13 +47,15 @@ const newProductSlice = createSlice({
       state.InfoProduct.specialOffer = action.payload;
     },
     updatePrice(state, action) {
-      state.InfoProduct.price.value = parseInt(action.payload);
+      state.InfoProduct.price.value = action.payload;
     },
     updateDiscount(state, action) {
-      state.InfoProduct.price.discount = parseInt(action.payload);
+      state.InfoProduct.price.discount = action.payload;
     },
     updateCount(state, action) {
-      state.InfoProduct.count = parseInt(action.payload);
+      const newValue =
+        action.payload === "" ? "" : parseInt(action.payload, 10);
+      state.InfoProduct.count = isNaN(newValue) ? "" : newValue;
     },
     updateCountType(state, action) {
       state.InfoProduct.countType = action.payload;
@@ -75,11 +77,9 @@ const newProductSlice = createSlice({
     },
     updateMainPhoto(state, action) {
       state.mainPhoto = action.payload;
-      console.log(state.mainPhoto);
     },
     updateMorePhotos(state, action) {
-      state.morePhotos = [...state.morePhotos, action.payload];
-      console.log(state.morePhotos);
+      state.morePhotos.push(action.payload);
     },
     resetMainPhoto(state) {
       state.mainPhoto = null;

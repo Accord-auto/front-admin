@@ -3,6 +3,7 @@ import {
   addArticle,
   removeArticle,
 } from "../../shared/api/articlesApi";
+import { selectAuthData } from "../authFeature/authSelector";
 
 export const funcFetchArticles = async () => {
   const res = await fetchArticles();
@@ -25,7 +26,10 @@ export const funcAddArticle = async (form, thunkAPI) => {
   return res;
 };
 
-export const funcRemoveArticle = async (articleId) => {
-  const res = await removeArticle(articleId);
+export const funcRemoveArticle = async (articleId, thunkAPI) => {
+  const state = thunkAPI.getState();
+  const { token } = selectAuthData(state);
+
+  const res = await removeArticle(articleId, token);
   return res;
 };

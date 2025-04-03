@@ -43,7 +43,7 @@ export const NPphoto1 = () => {
       {blob ? (
         <img src={blob} className="newP-photo"></img>
       ) : (
-        <label htmlFor="" className="newP-lbl" onPaste={handlePaste}>
+        <label htmlFor="" className="newP-lbl">
           <div className="newP-url-cont">
             <img src={plus} alt="" className="newP-url-cont-svg" />
             <input
@@ -51,14 +51,16 @@ export const NPphoto1 = () => {
               placeholder="URL image"
               className="inp-data url-input"
               onBlur={handleUrlChange}
+              name="textPhoto1"
+              onPaste={handlePaste}
             />
           </div>
           <input
-            required
             className="article-inp-file"
             type="file"
             accept="image/*"
             onChange={(e) => onChangeImg(e.target.files[0])}
+            name="Photo1"
           />
         </label>
       )}

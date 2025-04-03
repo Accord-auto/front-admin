@@ -27,12 +27,21 @@ export const fetchValues = async (id) => {
  * @return {Promise<Object|Error>}
  */
 
-export const addValue = async (id, name) => {
+export const addValue = async (id, name, token) => {
   await axios
-    .post(apiURL + "/add-value", {
-      propertyId: id,
-      value: name,
-    })
+    .post(
+      apiURL + "/add-value",
+      {
+        propertyId: id,
+        value: name,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "X-API-KEY": token,
+        },
+      }
+    )
     .then(function (res) {
       return res.data;
     })
@@ -51,14 +60,24 @@ export const addValue = async (id, name) => {
  * @return {Promise<Object>}
  */
 
-export const removeValue = async (id, idValue) => {
+export const removeValue = async (id, idValue, token) => {
+  console.log(id, idValue, token);
   await axios
-    .delete(apiURL + "/delete-value", {
-      data: {
-        idCharacteristic: id,
-        idValue: idValue,
+    .delete(
+      apiURL + "/delete-value",
+      {
+        data: {
+          idCharacteristic: id,
+          idValue: idValue,
+        },
       },
-    })
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "X-API-KEY": token,
+        },
+      }
+    )
     .then(function (res) {
       return res.data;
     })

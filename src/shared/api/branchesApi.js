@@ -1,4 +1,5 @@
 import axios from "axios";
+import { selectAuthData } from "../../features/authFeature/authSelector";
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 const apiURL = `${backendUrl}/companies`;
@@ -14,10 +15,14 @@ export const fetchDepartmentBranches = async () => {
 };
 
 export const addBranch = async (form, thunkAPI) => {
+  const state = thunkAPI.getState();
+  const { token } = selectAuthData(state);
+
   return await axios
     .post(apiURL, form, {
       headers: {
         "Content-Type": "application/json",
+        "X-API-KEY": token,
       },
     })
     .then(function (res) {
@@ -28,7 +33,12 @@ export const addBranch = async (form, thunkAPI) => {
     });
 };
 
-export const removeBranch = async (id) => {
-  const res = await axios.delete(`${apiURL}/${id}`);
+export const removeBranch = async (id, token) => {
+  const res = await axios.delete(`${apiURL}/${id}`, {
+    headers: {
+      "Content-Type": "application/json",
+      "X-API-KEY": token,
+    },
+  });
   return res.data;
 };

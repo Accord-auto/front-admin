@@ -14,8 +14,12 @@ export const PhotosComponent = ({ product }) => {
       ></img>
       <div className="edit-photos-cont">
         {Array.isArray(product?.additionalPhotos) ? (
-          product.additionalPhotos.map((photo) => (
-            <img src={`${apiURL}/${photo}`} className="edit-ads-photo"></img>
+          product.additionalPhotos.map((photo, i) => (
+            <img
+              src={`${apiURL}/${photo}`}
+              className="edit-ads-photo"
+              key={i}
+            ></img>
           ))
         ) : (
           <p>No additional photos available</p>

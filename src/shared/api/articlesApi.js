@@ -1,9 +1,11 @@
 import axios from "axios";
+// import { useSelector } from "react-redux";
+import { selectAuthData } from "../../features/authFeature/authSelector";
 
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 const apiURL = `${backendUrl}/articles`;
-
+// const { token } = useSelector(selectAuthData);
 /**
  * Fetches a list of articles from the API.
  *
@@ -28,10 +30,14 @@ export const fetchArticles = async () => {
  */
 
 export const addArticle = async (form, thunkAPI) => {
+  const state = thunkAPI.getState();
+  const { token } = selectAuthData(state);
+
   return await axios
     .post(apiURL, form, {
       headers: {
         "Content-Type": "multipart/form-data",
+        "X-API-KEY": token,
       },
     })
     .then(function (res) {
@@ -51,7 +57,12 @@ export const addArticle = async (form, thunkAPI) => {
  * @return {Promise<Object>}
  */
 
-export const removeArticle = async (id) => {
-  const res = await axios.delete(`${apiURL}/${id}`);
+export const removeArticle = async (id, token) => {
+  console.log(token);
+  const res = await axios.delete(`${apiURL}/${id}`, {
+    headers: {
+      "X-API-KEY": token,
+    },
+  });
   return res.data;
 };

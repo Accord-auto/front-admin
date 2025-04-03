@@ -36,6 +36,7 @@ export const NPinfo1 = () => {
         onChange={handlerNameChage}
         value={infoProduct.name}
         required
+        name="nameProduct"
       />
       <input
         type="text"
@@ -44,11 +45,13 @@ export const NPinfo1 = () => {
         value={infoProduct.brand}
         onChange={handlerBrandChage}
         required
+        name="brand"
       />
       <div className="article-cont-textarea">
         <textarea
           value={infoProduct.description}
           required
+          name="description"
           className="inp-data txt-area-data"
           placeholder="Описание товара"
           onChange={handlerDescriptionChage}

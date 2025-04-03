@@ -36,9 +36,7 @@ export const NewProductPage = () => {
 
   const addProduct = (e) => {
     e.preventDefault();
-    console.log(mainPhoto);
-    console.log(morePhotos);
-    if (infoProduct.countType !== "") {
+    if (mainPhoto && morePhotos[0] && infoProduct.categoryId !== null) {
       dispatch(
         addProductThunk({
           info: { ...infoProduct },
@@ -46,7 +44,7 @@ export const NewProductPage = () => {
         })
       );
     } else {
-      alert("Не все поля выбраны или заполнены!");
+      alert("Не все поля выбраны или заполнены! Обязательно от двух фото!");
     }
   };
 
@@ -64,6 +62,3 @@ export const NewProductPage = () => {
     </>
   );
 };
-
-// just read !!!
-// HOC

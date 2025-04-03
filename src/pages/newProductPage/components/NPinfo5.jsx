@@ -31,6 +31,7 @@ export const NPinfo5 = () => {
         value={infoProduct.article}
         onChange={onChangeArticle}
         required
+        name="article"
       />
       <input
         type="text"
@@ -39,6 +40,7 @@ export const NPinfo5 = () => {
         value={infoProduct.customerArticle}
         onChange={onChangeCustomerArticle}
         required
+        name="customerArticle"
       />
     </div>
   );

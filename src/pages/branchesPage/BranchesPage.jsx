@@ -13,7 +13,7 @@ import { useEffect } from "react";
 
 export const BranchesPage = () => {
   const dispatch = useDispatch();
-  const { status } = useSelector(selectNewPBranchData);
+  const { status, error } = useSelector(selectNewPBranchData);
 
   useEffect(() => {
     dispatch(getHeaderBranchesThunk());

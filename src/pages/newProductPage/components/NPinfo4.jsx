@@ -15,7 +15,8 @@ export const NPinfo4 = () => {
   const { infoProduct } = useSelector(selectNewProductData);
 
   const onChangeCount = (e) => {
-    dispatch(updateCount(e.target.value));
+    const value = e.target.value;
+    dispatch(updateCount(value === "" ? "" : Number(value)));
   };
 
   const onChangeCountType = (e) => {
@@ -28,9 +29,10 @@ export const NPinfo4 = () => {
         type="number"
         placeholder="Кол-во товара"
         className="inp-data"
-        value={infoProduct.count}
+        value={infoProduct.count ?? ""}
         onChange={onChangeCount}
         required
+        name="count"
       />
       <input
         type="text"
@@ -39,6 +41,7 @@ export const NPinfo4 = () => {
         required
         value={infoProduct.countType}
         onChange={onChangeCountType}
+        name="countType"
       />
     </div>
   );

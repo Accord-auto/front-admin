@@ -26,11 +26,20 @@ export const fetchCharacteristics = async () => {
  * @return {Promise<Object|Error>}
  */
 
-export const addCharacteristics = async (name) => {
+export const addCharacteristics = async (name, token) => {
   await axios
-    .post(apiURL, {
-      name: name,
-    })
+    .post(
+      apiURL,
+      {
+        name: name,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "X-API-KEY": token,
+        },
+      }
+    )
     .then(function (res) {
       return res.data;
     })
@@ -48,7 +57,13 @@ export const addCharacteristics = async (name) => {
  * @return {Promise<Object>}
  */
 
-export const removeCharacteristic = async (id) => {
-  const res = await axios.delete(`${apiURL}/${id}`);
+export const removeCharacteristic = async (id, token) => {
+  console.log(id);
+  const res = await axios.delete(`${apiURL}/${id}`, {
+    headers: {
+      "Content-Type": "application/json",
+      "X-API-KEY": token,
+    },
+  });
   return res.data;
 };

@@ -29,11 +29,28 @@ export const ArticleForm = () => {
   };
 
   const onChangeImg = (image) => {
-    setFormData((prev) => ({
-      ...prev,
-      file: image,
-    }));
-    setBlob(URL.createObjectURL(image));
+    if (typeof image === "string") {
+      // Если передана строка (URL), просто сохраняем её в blob
+      setBlob(image);
+      setFormData((prev) => ({
+        ...prev,
+        file: image, // Сохраняем ссылку вместо файла
+      }));
+    } else {
+      // Если передан файл, создаем blob URL
+      setBlob(URL.createObjectURL(image));
+      setFormData((prev) => ({
+        ...prev,
+        file: image,
+      }));
+    }
+  };
+
+  const handleUrlChange = (e) => {
+    const url = e.target.value.trim();
+    if (url) {
+      onChangeImg(url); // Теперь передаём строку корректно
+    }
   };
 
   const submitForm = (e) => {
@@ -63,14 +80,23 @@ export const ArticleForm = () => {
           <img src={blob} className="article-photo"></img>
         ) : (
           <label htmlFor="" className="article-lbl">
-            <img src={plus} alt="" className="article-svg" />
+            <div className="newP-url-cont">
+              <img src={plus} alt="" className="newP-url-cont-svg" />
+              <input
+                type="text"
+                placeholder="URL image"
+                className="inp-data url-input"
+                onBlur={handleUrlChange}
+                name="textPhoto1"
+              />
+            </div>
             <input
-              value={formData.file}
-              required
+              name="file"
               className="article-inp-file"
               type="file"
-              accept=".jpg, .jpeg, .png"
+              accept="image/*"
               onChange={(e) => onChangeImg(e.target.files[0])}
+              required={!formData.file || typeof formData.file !== "string"}
             />
           </label>
         )}

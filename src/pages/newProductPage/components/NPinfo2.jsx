@@ -47,6 +47,7 @@ export const NPinfo2 = () => {
           className="data-check"
           defaultChecked={infoProduct.specialOffer}
           onChange={onChangeSpecOffer}
+          name="specialoffer"
         />
         <label>Спец. предложение</label>
       </div>

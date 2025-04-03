@@ -7,7 +7,7 @@ import { selectValuesData } from "./valuesSelector";
 export const ValuesForm = ({ idCharacter }) => {
   const [valueName, setValueName] = useState("");
   const dispatch = useDispatch();
-  const { status } = useSelector(selectValuesData);
+  const { status, error } = useSelector(selectValuesData);
 
   useEffect(() => {
     if (status === "failed/add") {

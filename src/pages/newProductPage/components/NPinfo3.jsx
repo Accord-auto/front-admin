@@ -31,6 +31,7 @@ export const NPinfo3 = () => {
         value={infoProduct.price.value}
         onChange={onChangePrice}
         required
+        name="price"
       />
       <input
         type="number"
@@ -38,6 +39,7 @@ export const NPinfo3 = () => {
         className="inp-data"
         value={infoProduct.price.discount}
         onChange={onChangeDiscount}
+        name="priceDiscount"
       />
     </div>
   );

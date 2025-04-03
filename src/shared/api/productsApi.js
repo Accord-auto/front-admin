@@ -1,4 +1,5 @@
 import axios from "axios";
+import { selectAuthData } from "../../features/authFeature/authSelector";
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 const apiURL = `${backendUrl}/products`;
@@ -33,10 +34,14 @@ export const fetchMiniCatalog = async () => {
  */
 
 export const addProduct = async (form, thunkAPI) => {
+  const state = thunkAPI.getState();
+  const { token } = selectAuthData(state);
+
   return await axios
     .post(apiURL, form, {
       headers: {
         "Content-Type": "multipart/form-data",
+        "X-API-KEY": token,
       },
     })
     .then(function (res) {
@@ -81,10 +86,11 @@ export const changeCountProduct = async (id, count) => {
   return res.data;
 };
 
-export const deleteProduct = async (id) => {
+export const deleteProduct = async (id, token) => {
   const res = await axios.delete(`${apiURL}/${id}`, {
     headers: {
       "Content-Type": "application/json",
+      "X-API-KEY": token,
     },
   });
   return res.data;
