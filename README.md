@@ -51,3 +51,7 @@ npm run dev
 cd front-client
 npm i
 npm run dev
+
+## Изменить:
+
+В файл .env добавить ссылку на адрес бэкэнда
