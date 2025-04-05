@@ -18,7 +18,8 @@
   margin: 20px auto;
 }
 
-.main-btns {
+.main-btns,
+.btn-exit {
   font-size: 20px;
   padding: 10px 15px;
   border-radius: 10px;
@@ -29,4 +30,20 @@
 .main-btns:hover {
   color: rgb(247, 248, 250);
   background-color: #3f77af;
+}
+
+.btn-exit:hover {
+  border: 1px solid #3f77af;
+}
+
+.btn-exit {
+  margin: 20px;
+  display: flex;
+  flex-direction: row;
+  padding: 5px;
+}
+
+.btn-exit-svg {
+  width: 20px;
+  height: auto;
 }

@@ -8,8 +8,16 @@ import { EditablePage } from "./pages/editablePage/EditablePage";
 import { BranchesPage } from "./pages/branchesPage/BranchesPage";
 import { AuthPage } from "./pages/authPage/AuthPage";
 import { PrivateRoute } from "./shared/utils/PrivateRoute";
+import { useEffect } from "react";
+import { verifyTokenOnLoad } from "./shared/utils/authInit";
+import { useDispatch } from "react-redux";
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    verifyTokenOnLoad(dispatch);
+  }, [dispatch]);
+
   return (
     <BrowserRouter basename="/admin">
       <Routes>

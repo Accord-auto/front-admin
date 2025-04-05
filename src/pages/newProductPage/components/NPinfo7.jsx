@@ -38,7 +38,6 @@ export const NPinfo7 = ({ onDelete, idUniq }) => {
   };
 
   const handleDelete = () => {
-    console.log(data.idProperty);
     onDelete(data.idProperty, idUniq);
   };
 

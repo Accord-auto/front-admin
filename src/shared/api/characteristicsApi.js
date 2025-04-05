@@ -58,7 +58,6 @@ export const addCharacteristics = async (name, token) => {
  */
 
 export const removeCharacteristic = async (id, token) => {
-  console.log(id);
   const res = await axios.delete(`${apiURL}/${id}`, {
     headers: {
       "Content-Type": "application/json",

@@ -3,7 +3,16 @@ import { selectAuthData } from "../../features/authFeature/authSelector";
 import { useSelector } from "react-redux";
 
 export const PrivateRoute = () => {
-  const { isAuth } = useSelector(selectAuthData);
+  const { isAuth, status } = useSelector(selectAuthData);
+  const token = localStorage.getItem("token");
 
-  return isAuth ? <Outlet /> : <Navigate to={"/login"} />;
+  if (status === "loading" && token) {
+    return <div className="comp">Загрузка...</div>;
+  }
+
+  if (!isAuth) {
+    return <Navigate to="/login" replace />;
+  }
+
+  return <Outlet />;
 };

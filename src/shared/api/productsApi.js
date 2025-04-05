@@ -6,7 +6,7 @@ const apiURL = `${backendUrl}/products`;
 
 const params = {
   offset: 0,
-  limit: 30,
+  limit: 10000,
   sort: "COUNT_ASC",
 };
 
@@ -45,7 +45,6 @@ export const addProduct = async (form, thunkAPI) => {
       },
     })
     .then(function (res) {
-      console.log(res);
       return res.data;
     })
     .catch(function (error) {
@@ -55,7 +54,6 @@ export const addProduct = async (form, thunkAPI) => {
 
 export const getProduct = async (id) => {
   const res = await axios.get(`${apiURL}/${id}`);
-  console.log(res.data);
   return res.data;
 };
 
@@ -80,7 +78,6 @@ export const changeDiscountProduct = async (id, price, token) => {
 };
 
 export const changeCountProduct = async (id, count, token) => {
-  console.log(id, count, token);
   const res = await axios.put(`${apiURL}/${id}/count`, count, {
     headers: {
       "Content-Type": "application/json",

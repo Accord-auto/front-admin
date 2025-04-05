@@ -40,8 +40,8 @@ export const CategoryList = () => {
           </tr>
         </thead>
         <tbody>
-          {categories.map((category) => (
-            <CategoryBlock categoryInfo={category} />
+          {categories.map((category, i) => (
+            <CategoryBlock categoryInfo={category} key={i} />
           ))}
         </tbody>
       </table>

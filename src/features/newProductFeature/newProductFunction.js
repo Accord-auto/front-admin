@@ -23,7 +23,6 @@ export const funcCreateProduct = async (form, thunkAPI) => {
       ...form.info,
     })
   );
-  console.log(formData);
   const res = await addProduct(formData, thunkAPI);
   return res;
 };

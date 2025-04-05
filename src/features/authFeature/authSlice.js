@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { funcAuthApi } from "./authFunction";
+import { funcAuthApi, funcLogoutAuth } from "./authFunction";
 
 export const authThunk = createAsyncThunk(
   "auth/getToken",
@@ -8,7 +8,7 @@ export const authThunk = createAsyncThunk(
       const res = await funcAuthApi(form);
       if (!res.apiKey) throw new Error("Токен не получен");
 
-      sessionStorage.setItem("token", res.apiKey);
+      localStorage.setItem("token", res.apiKey);
       return res.apiKey;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -16,18 +16,35 @@ export const authThunk = createAsyncThunk(
   }
 );
 
+export const logoutAuthThunk = createAsyncThunk(
+  "auth/logoutAuth",
+  funcLogoutAuth
+);
+
+const initialState = {
+  form: {
+    username: "",
+    password: "",
+  },
+  token: null,
+  isAuth: false,
+  status: "loading",
+  error: null,
+};
+
+const initializeAuthState = () => {
+  const token = localStorage.getItem("token");
+  return {
+    ...initialState,
+    token,
+    isAuth: !!token,
+    status: "idle",
+  };
+};
+
 const authSlice = createSlice({
   name: "auth",
-  initialState: {
-    form: {
-      username: "",
-      password: "",
-    },
-    token: sessionStorage.getItem("token") || null,
-    isAuth: !!sessionStorage.getItem("token"),
-    status: "idle",
-    error: null,
-  },
+  initialState: initializeAuthState(),
   reducers: {
     updateUsername(state, action) {
       state.form.username = action.payload;
@@ -35,10 +52,19 @@ const authSlice = createSlice({
     updatePassword(state, action) {
       state.form.password = action.payload;
     },
-    logout(state) {
+    clearAuth: (state) => {
       state.token = null;
-      state.isAuthenticated = false;
-      sessionStorage.removeItem("token");
+      state.isAuth = false;
+      state.status = "idle";
+      state.error = null;
+      state.form = { username: "", password: "" };
+      localStorage.removeItem("token");
+    },
+    initializeAuth(state) {
+      const token = localStorage.getItem("token");
+      state.token = token;
+      state.isAuth = !!token;
+      state.status = "idle";
     },
   },
   extraReducers: (builder) => {
@@ -54,10 +80,33 @@ const authSlice = createSlice({
       .addCase(authThunk.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
+      })
+      .addCase(logoutAuthThunk.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(logoutAuthThunk.fulfilled, (state) => {
+        localStorage.removeItem("token");
+        state.token = null;
+        state.isAuth = false;
+        state.form.username = "";
+        state.form.password = "";
+        state.form = { username: "", password: "" };
+        state.status = "idle";
+      })
+      .addCase(logoutAuthThunk.rejected, (state, action) => {
+        localStorage.removeItem("token");
+        state.token = null;
+        state.isAuth = false;
+        state.form.username = "";
+        state.form.password = "";
+        state.form = { username: "", password: "" };
+        state.status = "idle";
+        state.error = action.payload;
       });
   },
 });
 
-export const { updateUsername, updatePassword, logout } = authSlice.actions;
+export const { updateUsername, updatePassword, clearAuth, initializeAuth } =
+  authSlice.actions;
 
 export default authSlice.reducer;

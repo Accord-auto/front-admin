@@ -9,7 +9,6 @@ export const ValueBlock = ({ valueInfo, idSelectedCharacteristic }) => {
   const [isActive, setIsActive] = useState(false);
 
   const removeValue = (id) => {
-    console.log("idC: " + idSelectedCharacteristic + ", idV: " + id);
     dispatch(removeValueThunk({ idC: idSelectedCharacteristic, idV: id }));
   };
 

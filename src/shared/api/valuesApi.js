@@ -61,7 +61,6 @@ export const addValue = async (id, name, token) => {
  */
 
 export const removeValue = async (id, idValue, token) => {
-  console.log(id, idValue, token);
   try {
     const res = await axios.delete(apiURL + "/delete-value", {
       headers: {

@@ -58,7 +58,6 @@ export const addArticle = async (form, thunkAPI) => {
  */
 
 export const removeArticle = async (id, token) => {
-  console.log(token);
   const res = await axios.delete(`${apiURL}/${id}`, {
     headers: {
       "X-API-KEY": token,
