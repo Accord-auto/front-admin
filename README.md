@@ -46,11 +46,30 @@ git clone ###
 
 cd front-admin
 npm i
-npm run dev
+npm run build
 ///
 cd front-client
 npm i
-npm run dev
+npm run build
+
+Требования:
+
+Node.js - v22.13.1 (омжно от 18+)
+npm 9+
+Vite 6+
+ESLint 9+
+
+Основные зависимости:
+
+1. react, react-dom (18+)
+
+2. redux, react-redux, @reduxjs/toolkit (для управления состоянием)
+
+3. axios (для HTTP-запросов)
+
+4. react-router-dom (для маршрутизации)
+
+5. vite (сборщик)
 
 ## Изменить:
 
